@@ -15,7 +15,7 @@ contract UserContract {
     //Array con los usuarios
     address[]total;
     //Creación de eventos
-    event onUserJoined(address,string);
+    //event onUserJoined(address,string);
 
     //funcion para registrarse en el contrato
     function join(string name,string surname) public {
@@ -25,7 +25,7 @@ contract UserContract {
         userActual.surname = surname;
         usuariosRegistrados[msg.sender] = true;
         total.push(msg.sender);
-        emit onUserJoined(msg.sender,string(abi.encodePacked(name," ",surname)));
+        //emit onUserJoined(msg.sender,string(abi.encodePacked(name," ",surname)));
     }
 
     //funcion para recuperar nombre y apellido usuario
