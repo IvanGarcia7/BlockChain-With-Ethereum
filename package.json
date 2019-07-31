@@ -1,0 +1,23 @@
+{
+  "name": "blockchain-with-ethereum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanGarcia7/BlockChain-With-Ethereum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanGarcia7/BlockChain-With-Ethereum/issues"
+  },
+  "homepage": "https://github.com/IvanGarcia7/BlockChain-With-Ethereum#readme",
+  "dependencies": {
+    "solc": "^0.4.24",
+    "web3": "^1.2.0"
+  }
+}
