@@ -12,6 +12,10 @@ contract UserContract {
     mapping(address => User) private usuarios;
     //Mapping de tipo direcciona  bool
     mapping(address => bool) private usuariosRegistrados;
+    //Array con los usuarios
+    address[]total;
+    //Creación de eventos
+    event onUserJoined(address,string);
 
     //funcion para registrarse en el contrato
     function join(string name,string surname) public {
@@ -20,6 +24,8 @@ contract UserContract {
         userActual.name = name;
         userActual.surname = surname;
         usuariosRegistrados[msg.sender] = true;
+        total.push(msg.sender);
+        emit onUserJoined(msg.sender,string(abi.encodePacked(name," ",surname)));
     }
 
     //funcion para recuperar nombre y apellido usuario
@@ -31,6 +37,11 @@ contract UserContract {
 
     function userJoined(address addr) private view returns(bool) {
         return usuariosRegistrados[addr];
+    }
+
+    //funcion para conocer el número de usuarios registrados
+    function totalUsers() public view returns(uint) {
+        return total.length;
     }
 
 
