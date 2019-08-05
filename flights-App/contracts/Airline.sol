@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity >=0.4.24;
 
 contract Airline {
 
@@ -14,19 +14,19 @@ contract Airline {
         uint price;
     }
 
-    uint etherRP = 0.5 ether;
+    uint etherRP = 0.05 ether;
 
     Fligths[] public flights;
-    mapping(address => Customer) private customersMapping;
-    mapping(address => Fligths[]) private fligthsMapping;
-    mapping(address => uint) private customerTotalFligthsMapping;
+    mapping(address => Customer) public customersMapping;
+    mapping(address => Fligths[]) public fligthsMapping;
+    mapping(address => uint) public customerTotalFligthsMapping;
     event FlightPurchased(address indexed customer, uint price);
 
     constructor() public {
         owner = msg.sender;
         //Primer requisito cumplido, poseer vuelos iniciales disponibles de forma pública
-        flights.push(Fligths('España',4 ether));
-        flights.push(Fligths('Venecia',2 ether));
+        flights.push(Fligths('España',3 ether));
+        flights.push(Fligths('Venecia',3 ether));
         flights.push(Fligths('Tomorrowland',3 ether));
         flights.push(Fligths('Palo Alto',10 ether));
     }
@@ -63,7 +63,7 @@ contract Airline {
 
     //Recuperar el balance de la aerolínea
     function getAirlineBalance() public isOwner view returns(uint) {
-        address airlineAddress = this;
+        address airlineAddress = address(this);
         return airlineAddress.balance;
     }
 
