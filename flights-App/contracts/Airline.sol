@@ -14,13 +14,17 @@ contract Airline {
         uint price;
     }
 
-    uint etherRP = 0.05 ether;
+    uint etherRP = 0.5 ether;
 
     Fligths[] public flights;
     mapping(address => Customer) public customersMapping;
     mapping(address => Fligths[]) public fligthsMapping;
     mapping(address => uint) public customerTotalFligthsMapping;
-    event FlightPurchased(address indexed customer, uint price);
+
+    //se emite cuando se compra un vuelo
+    event FlightPurchased(address indexed customer, uint price,string flight);
+
+
 
     constructor() public {
         owner = msg.sender;
@@ -40,7 +44,7 @@ contract Airline {
         user.total_flights += 1;
         fligthsMapping[msg.sender].push(fligthSelected);
         customerTotalFligthsMapping[msg.sender]++;
-        emit FlightPurchased(msg.sender,fligthSelected.price);
+        FlightPurchased(msg.sender,fligthSelected.price,fligthSelected.name);
     }
 
     function totalFlights() public view returns(uint) {
@@ -57,8 +61,7 @@ contract Airline {
 
     //Recuperar los RP por parte del cliente
     function getRefundableEther() public view returns(uint) {
-        Customer storage customer = customersMapping[msg.sender];
-        return etherRP * customer.loyalty_points;
+        return etherRP * customersMapping[msg.sender].loyalty_points;
     }
 
     //Recuperar el balance de la aerolínea
